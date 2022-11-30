@@ -1,0 +1,174 @@
+*,*::before,*::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+
+    transition-property: none;
+    transition-duration: var(--duration,0.15s);
+    transition-timing-function: var(--ease, ease-in-out);
+}
+
+@media (prefers-reduced-motion:reduced) {
+    *,*::before,*::after {
+        --duration: 0s !important;
+    }
+}
+
+html {
+    font-size: clamp(22px,2.5vw,32px);
+}
+
+body {
+    background-color: black;
+    color: white;
+    font-family: 'Source Code Pro', monospace;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1rem;
+    font-weight: 700;
+}
+
+form {
+    display: flex;
+    height: 100%;
+    justify-content: center;
+    align-items: center;
+    padding: 1em;
+    flex-flow: column;
+    gap: 1em;
+}
+
+form input {
+    -webkit-appearance: none;
+    padding: 0;
+    background-color: transparent;
+    color: inherit;
+    border: none;
+    border-bottom: 1px solid rgba(255,255,255,0.4);
+    transition-property: border-color;
+    font:inherit;
+    padding-bottom: 1ex;
+}
+
+form input::placeholder {
+    color: rgba(255,255,255,0.4);
+}
+
+form input:focus {
+    outline: none;
+}
+
+form input:focus-visible {
+    border-bottom: 1px solid white;
+}
+
+button {
+    -webkit-appearance: none;
+    background-color: transparent;
+    padding: 1em;
+    font: inherit;
+    font-size: 0.5em;
+    color: inherit;
+    border: 0.2em solid currentColor;
+    border-radius: 0px;
+    cursor: pointer;
+    text-align: center;
+    min-width: 0px;
+    transition-property: min-width,font-style;
+}
+
+canvas {
+    position: absolute;
+    opacity: 0;
+    pointer-events: none;
+}
+
+@media (hover: hover) {
+    button:hover {
+        min-width: 15vw;
+        font-style: italic;
+    }
+}
+
+button:focus-visible {
+    min-width: 15vw;
+    font-style: italic;
+}
+
+form :where(button, input, fieldset) {
+    animation: slideIn 1s ease-in-out 0.5s forwards;
+    opacity: 0;
+    transform: translateY(1em);
+}
+
+@keyframes slideIn {
+    0% {
+        transform: translateY(1em);
+        opacity: 0;
+    }
+    100% {
+        transform: translateY(0em);
+        opacity: initial;
+    }
+}
+
+dialog {
+    width: min(90vw,768px);
+    max-height: 90vh;
+    position:fixed;
+    padding: 1em;
+    inset: 50%;
+    transform: translate(-50%,-50%);
+    transition-property: opacity;
+    opacity: 0;
+}
+
+dialog[open] {
+    opacity: 1;
+}
+
+dialog > div {
+    height: 100%;
+    display: flex;
+    flex-flow: column;
+    justify-content: center;
+    align-items: center;
+    gap: 1em;
+    text-align: center;
+}
+
+dialog img {
+    width: 100%;
+    height: auto;
+    margin: auto;
+    max-width: 100%;
+}
+
+dialog p {
+    margin-bottom: 1em;
+}
+
+fieldset {
+    display: flex;
+    border: none;
+}
+
+input[type='radio'] {
+    position: absolute;
+    pointer-events: none;
+}
+
+label {
+    flex: 1 0 50%;
+    border: 2px solid white;
+    cursor: pointer;
+    transition-property: color,background-color;
+    padding: 0 1em;
+}
+
+input[type='radio']:checked + label {
+    background-color: white;
+    color: black;
+}
