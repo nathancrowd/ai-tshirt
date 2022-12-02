@@ -16,9 +16,9 @@ const download = () => {
     cut.crossOrigin='anonymous';
     cut.onload=start;
     if (currentColor !== 'light') {
-        cut.src=location.origin + location.pathname + "/black-shirt-mask.png";
+        cut.src= location.origin + location.pathname + "black-shirt-mask.png";
     } else {
-        cut.src=location.origin + location.pathname + "/white-shirt-mask.png";
+        cut.src= location.origin + location.pathname + "white-shirt-mask.png";
     }
     let imgcount=2;
     function start() {
