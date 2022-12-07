@@ -2,9 +2,16 @@ const form = document.querySelector('form')
 const dialog = document.querySelector('.response')
 const reroll = document.querySelector('.reroll')
 const close = document.querySelector('.close')
+const speak = document.querySelector('.speak')
+const promptBox = document.querySelector('.prompt')
 const downloadBtn = document.querySelector('.download')
 const canvas=document.getElementById("canvas");
 const ctx=canvas.getContext("2d");
+const SpeechRecognition = window.SpeechRecognition || webkitSpeechRecognition;
+const SpeechGrammarList = window.SpeechGrammarList || webkitSpeechGrammarList;
+const SpeechRecognitionEvent = window.SpeechRecognitionEvent || webkitSpeechRecognitionEvent;
+
+const recognition = new SpeechRecognition();
 let currentSrc = ''
 let currentColor = ''
 
@@ -115,4 +122,15 @@ if (form) {
     reroll.addEventListener('click', () => onSubmit(), false)
     close.addEventListener('click', () => reset(), false)
     downloadBtn.addEventListener('click', () => download(), false)
+    recognition.addEventListener('result', e => {
+        if (promptBox && e.results) {
+            promptBox.value = e.results[0][0].transcript
+        }
+    })
+    recognition.addEventListener('speechend', e => {
+        recognition.stop()
+    })
+    speak.addEventListener('click', () => {
+        recognition.start()
+    })
 }
