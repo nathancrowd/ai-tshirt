@@ -106,7 +106,7 @@ const onSubmit = async (e = null) => {
     let data = new FormData(form)
     dialog.showModal()
     currentColor = data.get('color')
-    fetch(`https://ec2-54-229-148-71.eu-west-1.compute.amazonaws.com:3000/?prompt=${data.get('prompt')}&color=${currentColor}`)
+    fetch(`https://tshirt.thisiscrowd.com:3000/?prompt=${data.get('prompt')}&color=${currentColor}`)
     .then(r => r.json())
     .then(r => {
         currentSrc = `data:image/png;base64, ${r.data[0].b64_json}`
